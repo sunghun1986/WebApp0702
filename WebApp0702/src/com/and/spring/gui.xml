@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+
+	<!-- 아래의 빈코드는 JTextField jt = new JTextField(제목을넣어주세요,10); 와 같다 -->
+	<bean id="t_title" class="javax.swing.JTextField">
+		<constructor-arg index="0" value="제목을 넣어주세요"/>
+		<constructor-arg index="1" value="10"/>
+	</bean>
+	
+	<bean id="writer" class="javax.swing.JTextField">
+		<constructor-arg index="0" value="작성자를 넣어주세요"/>
+		<constructor-arg index="1" value="10"/>
+	</bean>
+	
+	<bean id="content" class="javax.swing.JTextArea">
+		<constructor-arg index="0" value="15"/>
+		<constructor-arg index="1" value="20"/>
+	</bean>
+	
+	<bean id="scroll" class="javax.swing.JScrollPane">
+		<constructor-arg index="0" ref="content"/>	
+	</bean>
+	
+	<bean id="bt" class="javax.swing.JButton">
+		<constructor-arg index="0" value="나버튼"/>	
+	</bean>
+	
+	<!-- 인스턴스화 시킬 빈들을 다 나열한 후엔, 
+		서로 포함관계를 weaving -->
+		
+	<bean id="myFrame" class="com.and.spring.MyFrame">
+		<property name="t_title" ref="t_title"/>
+		<property name="writer" ref="writer"/>		
+		<property name="scroll" ref="scroll"/>
+		<property name="bt" ref="bt"/>
+	</bean>
+	
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
