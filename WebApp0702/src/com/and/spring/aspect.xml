@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<bean id="student" class="com.and.spring.Student"/>
+	
+	<!-- 어플리케이션에서 공통적으로 사용할 로직 객체 등록 -->
+	<bean id="bell" class="com.and.spring.Bell"/>
+	
+	<!-- 학생이 벨 이라는 공통코드를 사용할것이라는 관계를 명시 
+	사실 이러한 AOP 기술은 스프링이 출시되기도 전에 예전부터 있었다
+	이러한 기술의 대표적 라이브러리가 ApectJ 라고 한다
+	스프링의 창시자인 로드존슨은 이 ApectJ를 도입했다...
+	-->
+	<aop:config>
+		<aop:aspect ref="bell">
+			<aop:pointcut expression="execution(public * com.and.spring.*.*(..))" id="bellPointcut"/>
+			<aop:before method="sound" pointcut-ref="bellPointcut"/>
+			<aop:after method="sound" pointcut-ref="bellPointcut"/>
+		</aop:aspect>
+	</aop:config>
+
+	
+</beans>
